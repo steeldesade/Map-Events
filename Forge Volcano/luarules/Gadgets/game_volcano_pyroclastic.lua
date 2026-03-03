@@ -37,6 +37,26 @@ function gadget:Initialize()
     end
 end
 
+local function IsVolcanoEnabled()
+  local modOpts = (Spring.GetModOptions and Spring.GetModOptions()) or {}
+  -- modoptions bools come through as "0"/"1" strings in many setups
+  local v = modOpts.forge_volcano
+  return v == nil or v == true or v == 1 or v == "1" or v == "true"
+end
+
+function gadget:Initialize()
+  -- existing map gate:
+  if Normalize(Game.mapName) ~= REQUIRED_MAP then
+    gadgetHandler:RemoveGadget(self); return
+  end
+
+  -- new modoption gate:
+  if not IsVolcanoEnabled() then
+    Spring.Echo("[Volcano] Disabled by modoption forge_volcano")
+    gadgetHandler:RemoveGadget(self); return
+  end
+end
+
 --------------------------------------------------------------------------------
 -- SYNCED
 --------------------------------------------------------------------------------
