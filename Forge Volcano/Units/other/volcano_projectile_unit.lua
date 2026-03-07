@@ -89,27 +89,30 @@ return {
         range              = 32000,
         reloadtime         = 5,
         weaponvelocity     = 780,
-
+	impulsefactor 	   = 3,
+	impulseboost 	   = 400,
         turret             = true,
         tolerance          = 5000,            
-        areaofeffect       = 150,
+        areaofeffect       = 220,
+	edgeeffectiveness  = 0.9,
 
         collideground      = true,
         avoidfriendly      = false,
         avoidfeature       = false,
 
         damage = {
-          default = 500,
+          default = 100,
         },
-
-        soundhit = "xplolrg1",
+		
+	soundhit = "xplolrg1",
+	soundhitvolume = 75,
       },
     },
 
     weapons = {
       [1] = {
         def = "VOLCANO_FIREBALL",
-        onlyTargetCategory = "SURFACE",        -- FIX
+        onlyTargetCategory = "SURFACE",
       },
     },
   },

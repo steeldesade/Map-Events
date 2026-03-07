@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------
--- VOLCANO PYROCLASTIC ERUPTIONS — FINAL MERGED BASELINE
+-- VOLCANO PYROCLASTIC ERUPTIONS — 
 --------------------------------------------------------------------------------
 
 function gadget:GetInfo()
@@ -11,50 +11,6 @@ function gadget:GetInfo()
         layer   = 0,
         enabled = true,
     }
-end
-
---------------------------------------------------------------------------------
--- Map Restriction (Forge v2.3 only)
---------------------------------------------------------------------------------
-
-local REQUIRED_MAP = "forge v2.3"
-
-local function Normalize(s)
-    s = tostring(s or "")
-    s = string.lower(s)
-    s = s:gsub(";", "")              -- remove trailing semicolon if present
-    s = s:gsub("%s+", " ")           -- collapse whitespace
-    s = s:gsub("^%s+", ""):gsub("%s+$", "")
-    return s
-end
-
-function gadget:Initialize()
-    local mapName = Normalize(Game.mapName)
-
-    if mapName ~= REQUIRED_MAP then
-        gadgetHandler:RemoveGadget(self)
-        return
-    end
-end
-
-local function IsVolcanoEnabled()
-  local modOpts = (Spring.GetModOptions and Spring.GetModOptions()) or {}
-  -- modoptions bools come through as "0"/"1" strings in many setups
-  local v = modOpts.forge_volcano
-  return v == nil or v == true or v == 1 or v == "1" or v == "true"
-end
-
-function gadget:Initialize()
-  -- existing map gate:
-  if Normalize(Game.mapName) ~= REQUIRED_MAP then
-    gadgetHandler:RemoveGadget(self); return
-  end
-
-  -- new modoption gate:
-  if not IsVolcanoEnabled() then
-    Spring.Echo("[Volcano] Disabled by modoption forge_volcano")
-    gadgetHandler:RemoveGadget(self); return
-  end
 end
 
 --------------------------------------------------------------------------------
@@ -101,6 +57,27 @@ local COOLDOWN_MAX = 12 * 60 * 30   -- 12 minutes
 local BUILDUP      = 20 * 30
 
 --------------------------------------------------------------------------------
+-- Runtime / map control
+--------------------------------------------------------------------------------
+local REQUIRED_MAP = "forge v2.3"
+local volcanoActive = true
+
+local function Normalize(s)
+    s = tostring(s or "")
+    s = string.lower(s)
+    s = s:gsub(";", "")
+    s = s:gsub("%s+", " ")
+    s = s:gsub("^%s+", ""):gsub("%s+$", "")
+    return s
+end
+
+local function IsVolcanoEnabled()
+    local modOpts = (Spring.GetModOptions and Spring.GetModOptions()) or {}
+    local v = modOpts.forge_volcano
+    return v == nil or v == true or v == 1 or v == "1" or v == "true"
+end
+
+--------------------------------------------------------------------------------
 -- State
 --------------------------------------------------------------------------------
 local nextErupt = nil
@@ -119,6 +96,64 @@ local function DelayCall(func, args, delay)
     local f = GameFrame() + delay
     delayed[f] = delayed[f] or {}
     delayed[f][#delayed[f]+1] = {func,args}
+end
+
+--------------------------------------------------------------------------------
+-- Volcano Controls "/luarules volcano" to pause/resume volcano explosion
+--------------------------------------------------------------------------------
+
+local function ResetVolcanoState()
+    nextErupt = GameFrame() + R(COOLDOWN_MIN, COOLDOWN_MAX)
+    delayed = {}
+    pendingDestroy = {}
+    firstFireballFrame = nil
+    ejectScheduled = false
+    buildupSoundPlayed = false
+end
+
+local function IsAdmin(playerID)
+    if Spring.IsCheatingEnabled() then
+        return true
+    end
+
+    if type(playerID) ~= "number" then
+        return false
+    end
+
+    local _, _, _, _, _, _, _, _, _, customKeys = Spring.GetPlayerInfo(playerID)
+    return type(customKeys) == "table" and customKeys.isHost
+end
+
+function gadget:Initialize()
+    if Normalize(Game.mapName) ~= REQUIRED_MAP then
+        gadgetHandler:RemoveGadget(self)
+        return
+    end
+
+    volcanoActive = IsVolcanoEnabled()
+    if not volcanoActive then
+        ResetVolcanoState()
+    end
+
+    gadgetHandler:AddChatAction("volcano", function(cmd, line, words, playerID)
+        if not IsAdmin(playerID) then
+            Spring.Echo("[Volcano] Host/admin only command.")
+            return
+        end
+
+        volcanoActive = not volcanoActive
+        if volcanoActive then
+            nextErupt = GameFrame() + R(COOLDOWN_MIN, COOLDOWN_MAX)
+            Spring.Echo("[Volcano] Volcano system resumed.")
+        else
+            ResetVolcanoState()
+            Spring.Echo("[Volcano] Volcano system paused.")
+        end
+    end)
+end
+
+function gadget:Shutdown()
+    gadgetHandler:RemoveChatAction("volcano")
 end
 
 --------------------------------------------------------------------------------
@@ -223,6 +258,10 @@ end
 --------------------------------------------------------------------------------
 function gadget:GameFrame(f)
 
+    if not volcanoActive then
+        return
+    end
+
     if delayed[f] then
         for _,d in ipairs(delayed[f]) do
             local fn,args = d[1],d[2]
@@ -270,7 +309,7 @@ function gadget:GameFrame(f)
         end
 
         math.random()
-        local n = math.random(3,9)
+        local n = math.random(5,11) -- number of fireballs
         local step = math.max(1, math.floor(60 / n))
         local start = 30 + math.random(0,4)
 
@@ -389,8 +428,8 @@ end
 --------------------------------------------------------------------------------
 else
 
-local spPlaySoundFile  = Spring.PlaySoundFile
-local spGetGameFrame   = Spring.GetGameFrame
+local spPlaySoundFile   = Spring.PlaySoundFile
+local spGetGameFrame    = Spring.GetGameFrame
 local spGetViewGeometry = Spring.GetViewGeometry
 
 local glPushMatrix = gl.PushMatrix
@@ -413,13 +452,11 @@ function gadget:Initialize()
         spPlaySoundFile("sounds/weapons/xplolrg1.wav", 0.55, "ui")
     end)
 
-    -- On-screen warning + LavaAlert voice
     gadgetHandler:AddSyncAction("quake_warning", function(_, msg)
         warningText = msg or "SEISMIC ACTIVITY DETECTED"
         warningEnd  = spGetGameFrame() + WARNING_FRAMES
 
         Spring.Echo("[Volcano] Warning: " .. warningText)
-
         spPlaySoundFile("sounds/voice-soundeffects/LavaAlert.wav", 1.0, "ui")
     end)
 end
