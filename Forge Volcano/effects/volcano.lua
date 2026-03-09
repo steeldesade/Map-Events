@@ -23,6 +23,7 @@ return {
       count    = 1,
       properties = {
         airdrag            = 0.72,
+	alwaysvisible      = true,
         colormap           = [[0.07 0.07 0.07 0.65   0.08 0.08 0.08 0.45   0.05 0.05 0.05 0.25   0 0 0 0.01]],
         directional        = false,
 
@@ -68,6 +69,7 @@ return {
       count    = 1,
       properties = {
         airdrag            = 0.92,
+	alwaysvisible      = true,
         colormap           = [[0.08 0.08 0.08 0.8   0.07 0.07 0.07 0.5   0.05 0.05 0.05 0.25   0 0 0 0.01]],
         directional        = false,
         emitrot            = 80,
@@ -104,6 +106,7 @@ return {
       count    = 1,
       properties = {
         airdrag            = 0.95,
+	alwaysvisible      = true,
         colormap           = [[0.07 0.07 0.07 0.6   0.06 0.06 0.06 0.35   0.04 0.04 0.04 0.18   0 0 0 0.01]],
         directional        = false,
         emitrot            = 85,
@@ -152,6 +155,7 @@ return {
       count    = 1,
       properties = {
         airdrag            = 0.90,
+	alwaysvisible      = true,
         colormap           = [[0.07 0.07 0.07 1.0   0.06 0.06 0.06 0.8   0.05 0.05 0.05 0.45   0 0 0 0.01]],
         directional        = false,
         emitrot            = 90,
@@ -190,6 +194,7 @@ return {
       count    = 1,
       properties = {
         airdrag            = 0.93,
+	alwaysvisible      = true,
         colormap           = [[0.10 0.10 0.10 0.9   0.09 0.09 0.09 0.6   0.07 0.07 0.07 0.3   0 0 0 0.01]],
         directional        = false,
         emitrot            = 90,
@@ -227,6 +232,7 @@ return {
       count    = 1,
       properties = {
         airdrag            = 0.96,
+	alwaysvisible      = true,
         colormap           = [[0.09 0.09 0.09 0.7   0.08 0.08 0.08 0.4   0.06 0.06 0.06 0.2   0 0 0 0.01]],
         directional        = false,
         emitrot            = 0,
@@ -264,6 +270,7 @@ return {
       count    = 1,
       properties = {
         airdrag            = 0.92,
+	alwaysvisible      = true,
         colormap           = [[0.10 0.10 0.10 0.8   0.09 0.09 0.09 0.5   0.07 0.07 0.07 0.25   0 0 0 0.01]],
         directional        = false,
         emitrot            = 5,
@@ -315,6 +322,7 @@ return {
       count    = 1,
       properties = {
         airdrag            = 0.93,
+	alwaysvisible      = true,
         colormap           = [[0.10 0.10 0.10 0.8   0.07 0.07 0.07 0.5   0 0 0 0.01]],
         directional        = false,
         emitrot            = 80,
@@ -397,6 +405,7 @@ return {
       count    = 1,
       properties = {
         airdrag            = 0.86,
+	alwaysvisible      = true,
         colormap           = [[1.0 0.85 0.5 1.0   1.0 0.55 0.2 0.7   0.8 0.3 0.1 0.4   0.25 0.08 0.03 0.15   0 0 0 0.01]],
         directional        = false,
         emitrot            = 90,
@@ -426,6 +435,7 @@ return {
       count    = 1,
       properties = {
         airdrag            = 0.93,
+	alwaysvisible      = true,
         colormap           = [[0.14 0.12 0.11 0.95   0.11 0.10 0.10 0.6   0.08 0.08 0.08 0.28   0 0 0 0.01]],
         directional        = false,
         emitrot            = 75,
@@ -472,6 +482,7 @@ return {
       count    = 1,
       properties = {
         airdrag            = 0.90,
+	alwaysvisible      = true,
         colormap           = [[0.10 0.10 0.10 1.0   0.09 0.09 0.09 0.65   0 0 0 0.01]],
         directional        = false,
         emitrot            = 70,
@@ -506,6 +517,7 @@ return {
       count    = 1,
       properties = {
         airdrag            = 0.88,
+	alwaysvisible      = true,
         colormap           = [[1.0 0.8 0.3 0.9   0.8 0.4 0.1 0.5   0.3 0.12 0.04 0.15   0 0 0 0.01]],
         directional        = false,
         emitrot            = 80,
@@ -535,6 +547,7 @@ return {
       count    = 1,
       properties = {
         airdrag            = 0.91,
+	alwaysvisible      = true,
         colormap           = [[0.15 0.12 0.08 0.6   0.10 0.08 0.06 0.35   0.05 0.04 0.03 0.15   0 0 0 0.01]],
         directional        = false,
         emitrot            = 70,
@@ -610,6 +623,7 @@ return {
       sizegrowth         = [[0.1 r0.2]],
       ttl                = 15,
       pos                = [[0, 10, 0]],
+      alwaysvisible      = true,
     },
   },
 
@@ -785,6 +799,7 @@ return {
     water              = true,
     properties = {
       airdrag            = 0.952,
+      alwaysvisible      = true,
       colormap           = [[1.0 0.75 0.35 0.009   0.85 0.35 0.12 0.013   0.25 0.08 0.03 0.006   0 0 0 0.01]],
       directional        = true,
       emitrot            = 70,
@@ -804,7 +819,7 @@ return {
       sizemod            = 1.0,
       texture            = [[explowater]],
       useairlos          = true,
-      alwaysvisible      = true,
+      
     },
   },
 
@@ -1013,6 +1028,7 @@ return {
       count    = 1,
       properties = {
         airdrag            = 0.85,
+	alwaysvisible      = true,
         colormap           = [[1.0 0.8 0.4 1.0   1.0 0.45 0.12 0.7   0.7 0.2 0.06 0.4   0.25 0.08 0.03 0.12   0 0 0 0.01]],
         directional        = false,
         emitrot            = 0,
@@ -1042,6 +1058,7 @@ return {
       count    = 1,
       properties = {
         airdrag            = 0.93,
+	alwaysvisible      = true,
         colormap           = [[0.08 0.07 0.07 0.95   0.09 0.09 0.09 0.7   0.07 0.07 0.07 0.4   0 0 0 0.01]],
         directional        = false,
         emitrot            = 10,
@@ -1076,6 +1093,7 @@ return {
       count    = 1,
       properties = {
         airdrag            = 0.86,
+	alwaysvisible      = true,
         colormap           = [[1.0 0.9 0.6 0.9   1.0 0.6 0.25 0.6   0.8 0.35 0.1 0.3   0 0 0 0.01]],
         directional        = false,
         emitrot            = 0,
@@ -1121,6 +1139,7 @@ return {
       water  = false,
       properties = {
         airdrag            = 0.90,
+	alwaysvisible      = true,
         colormap           = [[0.1 0.1 0.1 1   0.09 0.09 0.09 0.6   0 0 0 0.01]],
         emitrot            = 80,
         emitrotspread      = 45,
@@ -1154,6 +1173,7 @@ return {
       water  = false,
       properties = {
         airdrag            = 0.90,
+	alwaysvisible      = true,
         colormap           = [[1 0.8 0.3 1   1 0.3 0.1 0.5   0.3 0.1 0.05 0.2   0 0 0 0.01]],
         emitrot            = 90,
         emitrotspread      = 25,
@@ -1185,5 +1205,87 @@ return {
       },
     },
   },
+
+  ["Volcano_fire-area"] = {
+      usedefaultexplosions = false,
+      burned_area = {
+        air                = true,
+        class              = [[CBitmapMuzzleFlame]],
+        count              = 0,
+        ground             = true,
+        underwater         = 1,
+        water              = true,
+        properties = {
+          colormap           = [[0 0 0 0.1   0.08 0.06 0.06 0.2   0.12 0.1 0.1 0.75      0.12 0.1 0.1 0.80   0.12 0.1 0.1 0.80    0.12 0.1 0.1 0.80    0.11 0.08 0.08 0.45   0.10 0.07 0.07 0.2   0.08 0.06 0.06 0.2   0 0 0 0.1]],
+          dir                = [[0, 1, 0]],
+          frontoffset        = 0,
+          fronttexture       = [[bloodcentersplatshwhite]],
+          length             = 15,
+          sidetexture        = [[none]],
+          size               = [[84 r44]],
+          sizegrowth         = 0.1,
+          ttl                = 330,
+          pos                = [[0, 4, 0]],
+          rotParams          = [[0, 0, -180 r360]],
+          alwaysvisible      = true,
+          drawOrder          = -2,
+        },
+      },
+
+    fireflamearea = {
+             air                = true,
+             class              = [[CExpGenSpawner]],
+             count              = 25, --60
+             ground             = true,
+             water              = true,
+             underwater         = true,
+             properties = {
+                 delay              = [[i12]],
+                 explosiongenerator = [[custom:fire-flames]],
+                 pos                = [[-66 r132, 0 r10, -66 r132]],
+		 alwaysvisible      = true,
+            },
+        },
+    fireflameground = {
+             air                = true,
+             class              = [[CExpGenSpawner]],
+             count              = 24, --60
+             ground             = true,
+             water              = true,
+             underwater         = true,
+             properties = {
+                 delay              = [[0 r300]],
+                 explosiongenerator = [[custom:fire-burnground]],
+                 pos                = [[-60 r120, 0 r5, -60 r120]],
+		 alwaysvisible      = true,
+            },
+       },
+   fireburngroundcircle = {
+         air                = false,
+         class              = [[CBitmapMuzzleFlame]],
+         count              = 0,
+         ground             = true,
+         underwater         = true,
+         water              = true,
+         properties = {
+
+           colormap           = [[0 0 0 0.01   0.40 0.40 0.48 0.12   0.67 0.69 0.9 0.85   0.64 0.67 0.79 0.55   0.68 0.78 0.88 0.85   0.02 0.02 0.03 0.44   0.026 0.026 0.026 0.40   0.02 0.02 0.02 0.30   0.023 0.023 0.023 0.38   0 0 0 0.03   0 0 0 0.01]],
+           dir                = [[0, 1, 0]],
+           --gravity            = [[0.0, 0.1, 0.0]],
+           frontoffset        = 0,
+           fronttexture       = [[FireBall02-anim]],
+           animParams         = [[8,8,80 r50]],
+           length             = 0,
+           sidetexture        = [[none]],
+           size               = [[68 r36]],
+           sizegrowth         = [[-0.5 r2.2]],
+           ttl                = 270,
+           pos                = [[0, 5, 0]],
+           rotParams          = [[-2 r4, -2 r4, -180 r360]],
+           drawOrder          = -1,
+	   alwaysvisible      = true,
+          },
+        },
+   },
 
 }
