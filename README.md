@@ -4,6 +4,8 @@ Cinematic environmental volcano event system for Beyond All Reason (BAR).
 
 This gadget orchestrates a staged volcanic eruption including seismic buildup, warning systems, eruption column, projectile launch, shockwave, smoke turbulence, and impact effects.
 
+📌 Usage: !bset forge_volcano 1 within the lobby, make sure the map Forge v2.3 is selected. Admin / host can issue the command /luarules volcano to pause / resume the event with cheats enabled.
+
 📌 Scope
 
 Map locked: Forge v2.3
@@ -120,7 +122,7 @@ WARNING_FRAMES	On-screen text duration
 
 Large-scale cinematic environmental event
 
-Deterministic scheduling (no modulo drift)
+Deterministic scheduling
 
 Strict map isolation
 
