@@ -111,19 +111,6 @@ local function ResetVolcanoState()
     buildupSoundPlayed = false
 end
 
-local function IsAdmin(playerID)
-    if Spring.IsCheatingEnabled() then
-        return true
-    end
-
-    if type(playerID) ~= "number" then
-        return false
-    end
-
-    local _, _, _, _, _, _, _, _, _, customKeys = Spring.GetPlayerInfo(playerID)
-    return type(customKeys) == "table" and customKeys.isHost
-end
-
 function gadget:Initialize()
     if Normalize(Game.mapName) ~= REQUIRED_MAP then
         gadgetHandler:RemoveGadget(self)
@@ -136,8 +123,12 @@ function gadget:Initialize()
     end
 
     gadgetHandler:AddChatAction("volcano", function(cmd, line, words, playerID)
-        if not IsAdmin(playerID) then
-            Spring.Echo("[Volcano] Host/admin only command.")
+        local accountInfo = select(11, Spring.GetPlayerInfo(playerID))
+        local accountID = (accountInfo and accountInfo.accountid) and tonumber(accountInfo.accountid) or -1
+        local authorized = _G.permissions.volcano[accountID]
+
+        if not (authorized or Spring.IsCheatingEnabled()) then
+            Spring.Echo("[Volcano] Unauthorized command.")
             return
         end
 
